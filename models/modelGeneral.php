@@ -6,7 +6,7 @@ class modelGeneral {
     private $conn;
 
     public function __construct() {
-        require_once '/opt/lampp/htdocs/app/config/Conexion.php';
+        require_once '../config/Conexion.php';
         $this->conn = CConexion::ConexionBD();
     }
 
@@ -25,6 +25,7 @@ class modelGeneral {
         $stmt = $this->conn->prepare($query);
         return($stmt->execute()) ? $stmt->fetchAll(): false;
     }
+    
     public function getAllestudiantes() {
         // Preparar la consulta de inserción
         $query = "SELECT * FROM estudiantes";
@@ -34,6 +35,38 @@ class modelGeneral {
 
     public function IngresarUsuario($user, $password) {
         return ($user==="reyes" && $password==="160004728");
+    }
+
+
+    public function getEstudiantes($cod_cur,$year,$periodo){
+
+        $query = "SELECT i.cod_est, e.nomb_est FROM inscripciones i join estudiantes e on i.cod_est = e.cod_est where cod_cur = $cod_cur and year = $year and periodo = $periodo";
+        $stmt = $this->conn->prepare($query);
+        return($stmt->execute()) ? $stmt->fetchAll(): false;
+    }
+
+    public function InscribirEstudiante($cod_est,$cod_cur,$periodo,$year){
+        
+        try {
+            $query = "INSERT INTO inscripciones(periodo,year,cod_cur,cod_est) values ($periodo,$year,$cod_cur,$cod_est)";
+            $stmt = $this->conn->prepare($query);
+            return($stmt->execute()) ? $stmt->fetchAll(): false;
+        }
+        catch (PDOException $exception){
+            return 'Error: ' . $exception->getMessage();
+        }
+
+    }
+
+    public function get_nomb_cur($cod_cur){
+        
+        $query = $this->conn->query("SELECT nomb_cur from cursos  where cod_cur = $cod_cur;");
+        
+        foreach($query as $row){
+            $nomb_cur = $row[0];
+        }
+
+        return $nomb_cur;
     }
 
 }

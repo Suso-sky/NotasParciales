@@ -34,7 +34,7 @@
             $cod_est = $_POST['cod_est'];
             $nomb_est = $_POST['nomb_est'];
             #creo que cuando dice agregar estudiante, se refiere a agregar un estudiante existente a un curso
-            $conn->AgregarEstudiante($cod_est,$nomb_est);
+            #$conn->AgregarEstudiante($cod_est,$nomb_est);
             echo "Agregado Correctamente";
             
         }

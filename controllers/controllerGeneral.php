@@ -8,7 +8,7 @@ class controllerGeneral {
 
     /* Inicializamos LA VARIABLE $model con el objeto model para llamar las funciones del modelo general*/
     public function __construct() {
-        require_once '/opt/lampp/htdocs/app/models/modelGeneral.php';
+        require_once '../models/modelGeneral.php';
         $this->model = new modelGeneral();
     }
 
@@ -29,6 +29,12 @@ class controllerGeneral {
             return ($this->model->getAllestudiantes()) ? $this->model->getAllestudiantes(): false;
             //Un if pero mas sencillo
          }    
+
+    public function getEstudiantes($cod_cur,$year,$periodo) {
+    return ($this->model->getEstudiantes($cod_cur,$year,$periodo)) ? $this->model->getEstudiantes($cod_cur,$year,$periodo): false;
+    }
+    
+    
         
 
 }
