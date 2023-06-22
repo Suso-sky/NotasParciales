@@ -21,7 +21,7 @@ class Connection{
 
     public function connect(){
         try{
-            $objeto = new Connection();
+            $objeto = new Connection();         
             $Connection = $objeto->ConnectionBD();
             return $Connection;    
         }
@@ -43,10 +43,11 @@ class Connection{
 
         $query = Connection::connect()->query("SELECT * FROM inscripciones where cod_cur = $cod_cur and year = $year and periodo = $periodo");
         
-        // Se muestran los results en una tabla HTML
+        // Se muestran los results en una tabla HTML f
         echo '<table>';
         echo '<tr>';
         $columns = [];
+        /*
         for ($i = 0; $i < $query->columnCount(); $i++){
     
             $meta = $query->getColumnMeta($i);
@@ -63,7 +64,7 @@ class Connection{
             }
             echo '</tr>';
         }
-        echo '</table>';
+        echo '</table>';*/
     }
 
     public function InscribirEstudiante($cod_est,$cod_cur,$periodo,$year){
@@ -79,8 +80,6 @@ class Connection{
         }
     }
 
-    
-    
 
     public function show_tables(){
         
