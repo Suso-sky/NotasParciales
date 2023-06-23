@@ -13,9 +13,9 @@ class controllerGeneral {
     }
 
     /* Para guardar, por ahora no usamos la funcion pero asi funciona */
-    public function saveEstudiantes($codEst, $nombEst) {
+    public function AddEstudiante($codEst, $nombEst) {
             $this->model->createEstudiante($codEst, $nombEst);
-            header('Location: /app/views/aqui_va_la_vista.php'); 
+            //header('Location: /app/views/aqui_va_la_vista.php'); 
             //Header es para redirrecionar una vez hecho todo
         }
 
@@ -33,6 +33,11 @@ class controllerGeneral {
     public function getEstudiantes($cod_cur,$year,$periodo) {
     return ($this->model->getEstudiantes($cod_cur,$year,$periodo)) ? $this->model->getEstudiantes($cod_cur,$year,$periodo): false;
     }
+
+    public function getNombCur($cod_cur) {
+        return ($this->model->getNombCur($cod_cur)) ? $this->model->getNombCur($cod_cur): false;
+        }
+
     
     
         

@@ -12,10 +12,8 @@ class modelGeneral {
 
     public function createEstudiante($codEst, $nombEst) {
         // Preparar la consulta de inserción
-        $query = "INSERT INTO estudiantes (cod_est, nomb_est) VALUES (:codEst, :nombEst)";
+        $query = "INSERT INTO estudiantes (cod_est, nomb_est) VALUES ($codEst, $nombEst)";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':codEst', $codEst);
-        $stmt->bindParam(':nombEst', $nombEst);
         return $stmt->execute();
     }
 
@@ -58,7 +56,7 @@ class modelGeneral {
 
     }
 
-    public function get_nomb_cur($cod_cur){
+    public function getNombCur($cod_cur){
         
         $query = $this->conn->query("SELECT nomb_cur from cursos  where cod_cur = $cod_cur;");
         

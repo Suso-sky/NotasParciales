@@ -6,7 +6,7 @@ class controllerLogin {
     private $model;
 
     public function __construct() {
-        require_once '/opt/lampp/htdocs/app/models/modelLogin.php';
+        require_once '../models/modelLogin.php';
         $this->model = new modelLogin();
     }
 

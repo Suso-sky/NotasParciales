@@ -1,35 +1,3 @@
-<?php
-require_once "../controllers/controllerGeneral.php";
-    $obj=new controllerGeneral();
-    $cursos=$obj->getAllcursos();
-
-    
-    
-    
-    $date = getdate();
-    echo"<p>".$date['mday']."/".$date['month']."/".$date['year']."</p>";
-    
-    echo"<form action='listado.php' method='POST'><center>";   
-        echo"<p>Seleccione  un curso</p>";
-        echo"<select name='cod_cur'>";
-        $tables = $obj->getAllcursos();
-            foreach($tables as $row){
-                echo"<option value='".$row[0]."'>".$row[1]."</option>";
-            }
-            echo"</select><br>";
-            
-            echo"<input name='year' placeholder='Año' required></input>";    
-        
-            
-        echo"<select name='periodo'>";    
-                echo"<option value='1'>Periodo 1</option>";
-                echo"<option value='2'>Periodo 2</option>";    
-            echo"</select><br><br>";
-        echo"<input type='submit' value='Ver Estudiantes'>";
-    echo"</form></center>";
-    
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -118,27 +86,37 @@ require_once "../controllers/controllerGeneral.php";
 
   <main class="content">
     <div class="container">
-      <h2 class="page-title">Vista general del curso</h2>
+      <h2 class="page-title">Registro de estudiantes</h2>
       <p class="page-description">Aquí encontrarás tus cursos, calificaciones y mensajes.</p>
       <div class="row row-cols-1 g-4">
-      
-      <?php foreach($cursos as $curso): ?>  
-      <div class="col" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); border-radius:6px; font-family: Arial, sans-serif;">
-          <div class="card h-100">
-          <br>
-            <div class="card-body">
-              <h5 class="card-title" style="font-size:1.5rem; padding-left:15px">2023 - <?=$curso[1] ?></h5>
-              <p class="card-text" style="font-size:1rem; padding-left:15px" >SEMESTRE IV</p>
-            </div>
-            <div class="card-footer">
-              <small class="text-muted" style="font-size:1rem; padding-left:15px" >Última actualización: 3 minutos atrás</small>
-            </div>
-            <br>
-          </div>
-        </div>
-        <br><br>
-        <?php endforeach; ?>
+        <?php
+            require_once "../controllers/controllerGeneral.php";
+            $obj=new controllerGeneral();
+            $actualPage = $_SERVER['PHP_SELF'];
+        ?>
+        <form action= <?php echo"$actualPage"?> method='POST'><center>   
+                
+            <input name='cod_est' placeholder='codigo estudiantil'></input>
 
+            <input name='nomb_est' placeholder='nombre del estudiante'></input>
+            
+            <input type='submit' value='Agregar Estudiante'>
+        </form></center>
+
+        <?php
+            if(isset($_POST['submit'])){
+                
+                $cod_est = $_POST['cod_est'];
+                $nomb_est = $_POST['nomb_est'];
+                
+                $obj->AddEstudiante($cod_est,$nomb_est);
+                echo "<alert>Agregado Correctamente</alert>";
+                
+            }
+        ?>
+
+      
+      
         <footer class="footer">
     <div class="container">
       <p>© 2023 Mi Sitio. Todos los derechos reservados.</p>

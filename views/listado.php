@@ -10,7 +10,9 @@ require_once "../controllers/controllerGeneral.php";
     
     
     $date = getdate();
-    echo"<p>".$date['mday']."/".$date['month']."/".$date['year']."</p>";
+    echo"<p><center>".$date['mday']."/".$date['month']."/".$date['year']."<center></p>";
+    $nombcur = $obj->getNombCur($cod_cur);
+    echo"<center><p>$nombcur</p></center>";
 
     /*
     $nomb_cur = $obj->get_nomb_cur($cod_cur);
@@ -144,7 +146,7 @@ require_once "../controllers/controllerGeneral.php";
     <ul class="menu">
       <li><a href="/app/views/SelectCurso.php"><i class="fa-solid fa-sitemap"></i></i>  Seleccionar Curso</a></li>
       <li><a href="/app/views/inscripcion.php"><i class="fa-solid fa-plus"></i>  Inscripcion de estudiantes</a></li>
-      <li><a href="/app/views/pagina_registro_Est.php"><i class="fa-solid fa-plus"></i>  Registro de estudiantes</a></li>
+      <li><a href="/app/views/registro.php"><i class="fa-solid fa-plus"></i>  Registro de estudiantes</a></li>
       <li><a href="/app/views/pagina_planeacion.php"><i class="fa-solid fa-clipboard"></i>  Planeacion</a></li>
       <li><a href="/app/views/pagina_calificaciones.php"><i class="fa-solid fa-plus"></i>  Calificaciones</a></li>
       <li><a href="#"><i class="fa-solid fa-clipboard"></i>  Reporte</a></li>
@@ -163,24 +165,27 @@ require_once "../controllers/controllerGeneral.php";
       <tr>
         <th style="background-color:red">Cod_est</th>
         <th style="background-color:green">Nombre</th>
+        <th style="background-color:white">Eliminar</th>
       </tr>
     </thead>
     <tbody>
       <?php foreach($estudiantes as $estu) : ?>
       <tr> <td><?=$estu[0]?></td>
-       <td><?=$estu[1]?></td></tr>
+       <td><?=$estu[1]?></td>
+       <td><center><input type="submit" value="X" ></center></td></tr> <?php /*falta poner a funcionar el boton de eliminar */?>
        <?php endforeach; ?>
+       
     </tbody>
+    
   </table>
 </div>
 
-<div class="pagination-container">
-  <button class="prev-btn">Anterior</button>
-  <span class="page-num"></span>
-  <button class="next-btn">Siguiente</button>
-</div>      
 
- <br><br><br><br>
+ <br>
+
+ <center><input type="button" onclick="location.href='../views/SelectCurso.php'" name="volver atrás" value="volver atrás">
+ 
+ <br><br>
         <footer class="footer">
     <div class="container">
       <p>© 2023 Mi Sitio. Todos los derechos reservados.</p>
